@@ -1,7 +1,4 @@
-var _interval; //todo refactor
-// todo imgGrid
-// todo terminal (parser + feedback)
-// todo hide start button (maybe create new state?)
+var _interval; //todo refactor _interval
 
 var PuzzleApp = React.createClass({
   getInitialState: function () {
@@ -21,7 +18,6 @@ var PuzzleApp = React.createClass({
       });
     }.bind(this), 10);
 
-
   },
   resetHandler: function () {
     if(this.state.isPlaying) {
@@ -35,6 +31,7 @@ var PuzzleApp = React.createClass({
       <div>
         <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
         <Timer elapsedTime={this.state.elapsedTime} />
+        <Terminal/>
       </div>
     );
   }
