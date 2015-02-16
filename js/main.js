@@ -12,16 +12,15 @@ var PuzzleApp = React.createClass({
   },
   startHandler: function () {
 
-    if(!this.state.isPlaying) {
-      var _startTime = moment();
+    var _startTime = moment();
+    this.setState({isPlaying: true});
 
-      _interval = setInterval(function () {
-        this.setState({
-          elapsedTime: moment(moment() - _startTime).format('mm:ss:SS'),
-          isPlaying: true
-        });
-      }.bind(this), 10);
-    }
+    _interval = setInterval(function () {
+      this.setState({
+        elapsedTime: moment(moment() - _startTime).format('mm:ss:SS')
+      });
+    }.bind(this), 10);
+
 
   },
   resetHandler: function () {
