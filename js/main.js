@@ -4,7 +4,11 @@ var PuzzleApp = React.createClass({
     //overlay
     //imgGrid
     //terminal (parser + feedback)
-    return (<h1>HELOO</h1>);
+    return (
+      <div>
+        <Timer/>
+      </div>
+    );
   }
 });
 
