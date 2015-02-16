@@ -6,28 +6,35 @@ var _interval; //todo refactor
 var PuzzleApp = React.createClass({
   getInitialState: function () {
     return {
-      elapsedTime: '00:00:00'
+      elapsedTime: '00:00:00',
+      isPlaying: false
     }
   },
   startHandler: function () {
 
-    var _startTime = moment();
+    if(!this.state.isPlaying) {
+      var _startTime = moment();
 
-    _interval = setInterval(function () {
-      this.setState({
-        elapsedTime: moment(moment() - _startTime).format('mm:ss:SS')
-      });
-    }.bind(this), 10);
+      _interval = setInterval(function () {
+        this.setState({
+          elapsedTime: moment(moment() - _startTime).format('mm:ss:SS'),
+          isPlaying: true
+        });
+      }.bind(this), 10);
+    }
 
   },
   resetHandler: function () {
-    clearInterval(_interval);
-    this.setState(this.getInitialState());
+    if(this.state.isPlaying) {
+      clearInterval(_interval);
+      _interval = null;
+      this.setState(this.getInitialState());
+    }
   },
   render: function () {
     return (
       <div>
-        <StartScreen handleStart={this.startHandler} handleReset={this.resetHandler} />
+        <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
         <Timer elapsedTime={this.state.elapsedTime} />
       </div>
     );
