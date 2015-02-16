@@ -32,6 +32,7 @@ var PuzzleApp = React.createClass({
         <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
         <Timer elapsedTime={this.state.elapsedTime} />
         <Terminal/>
+        <JigsawGrid />
       </div>
     );
   }
