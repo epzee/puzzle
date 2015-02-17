@@ -1,3 +1,8 @@
+// animation when someone solves it!
+// Invalid move handling
+// 8 move limit
+// Overlay
+// Styles
 var _interval; //todo refactor _interval
 
 var PuzzleApp = React.createClass({

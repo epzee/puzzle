@@ -25,9 +25,13 @@ var JigsawGrid = React.createClass({
     this.reorder();
 
     return (
-      <div id="jigsawGrid" className={'row' + (this.props.isPlaying ? ' is-playing' : '')}>
-        <div className="col-xs-12 jigsaw-grid-container">
-          {this.state.cells}
+      <div className="row">
+        <div className="col-xs-12">
+          <div id="jigsawGrid" className={(this.props.isPlaying ? ' is-playing' : '')}>
+            <div className="jigsaw-grid-container">
+            {this.state.cells}
+            </div>
+          </div>
         </div>
       </div>
     );
