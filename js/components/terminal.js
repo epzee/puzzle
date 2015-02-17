@@ -12,17 +12,18 @@ var Terminal = React.createClass({
       if (this.props.parser.isValidCommand(this.state.value)) {
         //todo make child component and remove from state, use props
         this.state.commands.push(<span>{this.state.value}</span>);
-        this.setState({value: '', syntaxError: false});
+        this.setState({value: ''});
+        this.props.errorMsgHandler('');
         this.props.moveCellHandler(this.props.parser.currentMove);
       } else {
-        this.setState({syntaxError: true});
+        this.props.errorMsgHandler('Syntax error!');
       }
     }
   },
   handleChange: function(event) {
     var newState = { value: event.target.value };
     if (!event.target.value) {
-      newState.syntaxError = false;
+      this.props.errorMsgHandler('');
     }
     this.setState(newState);
   },
@@ -37,7 +38,6 @@ var Terminal = React.createClass({
         </div>
         <div className="col-xs-12">
           <div className="history">
-            <span className={(this.state.syntaxError ? 'error' : 'hidden')}>Syntax error!</span>
             {this.state.commands}
           </div>
         </div>

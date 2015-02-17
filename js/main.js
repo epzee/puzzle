@@ -9,6 +9,7 @@ var PuzzleApp = React.createClass({
   getInitialState: function () {
     return {
       elapsedTime: '00:00:00',
+      errorMsg: '',
       isPlaying: false,
       grid: [
           [0,1,2],
@@ -69,13 +70,15 @@ var PuzzleApp = React.createClass({
     var targetCellPosition = (targetRow * 3) + targetCol;
 
     if(targetRow < 0 || targetRow > 2 || targetCol < 0 || targetCol > 2) {
-      throw Error('Forbidden Move: You can\'t move cell ' + (cellIndex + 1) + ' outside the grid');
+      this.setState({errorMsg: 'Forbidden Move: You can\'t move cell ' + (cellIndex + 1) + ' outside the grid'});
+      return;
     }
 
     var targetCellIndex = flatGrid.indexOf(targetCellPosition);
 
     if(targetCellIndex !== 8) {
-      throw Error('Forbidden Move: You can only move a cell into the blank space');
+      this.setState({errorMsg: 'Forbidden Move: You can only move a cell into the blank space'});
+      return;
     }
 
     flatGrid[cellIndex] = flatGrid[targetCellIndex];
@@ -126,14 +129,18 @@ var PuzzleApp = React.createClass({
       this.setState(this.getInitialState());
     }
   },
+  errorHandler: function (msg) {
+    this.setState({errorMsg: msg});
+  },
 
   render: function () {
     return (
       <div>
         <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
         <Timer elapsedTime={this.state.elapsedTime} />
-        <JigsawGrid isPlaying={this.state.isPlaying} grid={this.state.grid} />
-        <Terminal parser={PuzzlePHPParser} moveCellHandler={this.handleMoveCell} />
+        <JigsawGrid isPlaying={this.state.isPlaying} grid={this.state.grid} errorHandler={this.errorHandler} />
+        <ErrorReporter message={this.state.errorMsg} />
+        <Terminal parser={PuzzlePHPParser} errorMsgHandler={this.errorHandler} moveCellHandler={this.handleMoveCell} />
       </div>
     );
   }

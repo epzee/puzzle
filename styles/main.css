@@ -155,7 +155,7 @@
   width: 100%;
 }
 
-.terminal .error {
+.error {
   background-color: #d9534f;
   color: white;
   font-size: 1.3em;
@@ -164,6 +164,7 @@
   font-weight: 500;
   line-height: 35px;
   height: 40px;
+  display: block;
 }
 
 .history span {
