@@ -5,9 +5,9 @@ var PuzzlePHPParser = {
     if (cell.indexOf('$') === -1) return false; // '$' is missing
 
     cell = cell.toLowerCase().split('$')[1];
+    cell = parseInt(cell);
 
-    if (cell !== 'one' && cell !== 'two' && cell !== 'three' && cell !== 'four'
-      && cell !== 'five' && cell !== 'six' && cell !== 'seven' && cell !== 'eight' && cell !== 'nine') return false;
+    if (isNaN(cell) || (cell < 1 || cell > 9) ) return false;
 
     this.currentMove.cell = cell;
 

@@ -2,6 +2,13 @@
 // -- Solved state
 // -- 8 move limit
 // -- Overlay
+// -- history: clear on reset + make child component and remove from state, use props
+//
+//
+// nice to have:
+// -- module loader
+// -- js parser / option / image
+// -- tests
 
 var _interval; //todo refactor _interval
 
@@ -31,8 +38,9 @@ var PuzzleApp = React.createClass({
     }
 
     // cell 9 is always empty space (for now)
-    if (currentMove.cell === 'nine') {
-      throw Error('Can\'t move the empty cell');
+    if (currentMove.cell === 9) {
+      this.setState({errorMsg: 'Can\'t move the empty cell'});
+      return;
     }
 
     var directionMap = {
@@ -42,19 +50,7 @@ var PuzzleApp = React.createClass({
       right: 'moveRight'
     };
 
-    var cellMap = {
-      one: 1,
-      two: 2,
-      three: 3,
-      four: 4,
-      five: 5,
-      six: 6,
-      seven: 7,
-      eight: 8,
-      nine: 9
-    };
-
-    this[directionMap[currentMove.direction]](cellMap[currentMove.cell]);
+    this[directionMap[currentMove.direction]](currentMove.cell);
   },
 
   _move: function _move(cellIndex, rowOffset, colOffset) {
