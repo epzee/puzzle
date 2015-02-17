@@ -9,7 +9,7 @@ var Terminal = React.createClass({
   keyHandler: function (e) {
 
     if (e.keyCode === 13) {
-      if (PuzzlePHPParser.isValidCommand(this.state.value)) {
+      if (this.props.parser.isValidCommand(this.state.value)) {
         //todo make child component and remove from state, use props
         this.state.commands.push(<li>{this.state.value}</li>);
         this.setState({value: '', syntaxError: false});

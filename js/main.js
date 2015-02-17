@@ -128,7 +128,7 @@ var PuzzleApp = React.createClass({
         <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
         <Timer elapsedTime={this.state.elapsedTime} />
         <JigsawGrid isPlaying={this.state.isPlaying} grid={this.state.grid} />
-        <Terminal/>
+        <Terminal parser={PuzzlePHPParser}/>
       </div>
     );
   }
