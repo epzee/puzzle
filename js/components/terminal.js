@@ -13,6 +13,7 @@ var Terminal = React.createClass({
         //todo make child component and remove from state, use props
         this.state.commands.push(<li>{this.state.value}</li>);
         this.setState({value: '', syntaxError: false});
+        this.props.moveCellHandler(this.props.parser.currentMove);
       } else {
         this.setState({syntaxError: true});
       }
