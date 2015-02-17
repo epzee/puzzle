@@ -136,11 +136,11 @@ var PuzzleApp = React.createClass({
   render: function () {
     return (
       <div>
-        <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
         <Timer elapsedTime={this.state.elapsedTime} />
         <JigsawGrid isPlaying={this.state.isPlaying} grid={this.state.grid} errorHandler={this.errorHandler} />
         <ErrorReporter message={this.state.errorMsg} />
         <Terminal parser={PuzzlePHPParser} errorMsgHandler={this.errorHandler} moveCellHandler={this.handleMoveCell} />
+        <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
       </div>
     );
   }
