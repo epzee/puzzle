@@ -155,9 +155,19 @@
   width: 100%;
 }
 
+.terminal .error {
+  background-color: #d9534f;
+  color: white;
+  font-size: 1.3em;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  line-height: 35px;
+  height: 40px;
+}
+
 .history span {
   display: block;
-  opacity: 0.5;
 }
 
 .history {

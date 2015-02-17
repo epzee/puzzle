@@ -29,16 +29,15 @@ var Terminal = React.createClass({
   render: function () {
     return (
       <div className="row vertical-separation terminal">
-        <span className={(this.state.syntaxError ? 'label label-danger' : 'hidden')}>Syntax error!</span>
         <div className="col-xs-12">
-          <input type="text" placeholder="Type your move here!"
+          <input type="text" placeholder="Type your move here!" autofocus
             value={this.state.value}
             onKeyDown={this.keyHandler}
-            onChange={this.handleChange}>
-          </input>
+            onChange={this.handleChange} />
         </div>
         <div className="col-xs-12">
           <div className="history">
+            <span className={(this.state.syntaxError ? 'error' : 'hidden')}>Syntax error!</span>
             {this.state.commands}
           </div>
         </div>
