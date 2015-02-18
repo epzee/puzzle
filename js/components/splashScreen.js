@@ -17,7 +17,10 @@ var SplashScreen = React.createClass({
                   <div className="col-xs-12 text-center white-box">
                     <h1>You WON!</h1>
                     <p>It took you {this.props.elapsedTime} to solve this!!!</p>
-                    <button className="btn btn-lg btn-warning" onClick={this.props.handleReset}>Play Again!</button>
+                    <div>
+                      <img src="images/winner.gif" />
+                    </div>
+                    <button className="btn btn-lg btn-warning vertical-separation" onClick={this.props.handleReset}>Play Again!</button>
                   </div>
                 </div>
               </div>
