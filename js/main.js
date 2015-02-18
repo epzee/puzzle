@@ -1,9 +1,7 @@
 // TODO
-// -- history: clear on win
 // -- better start screen (awesome title + better instructions)
 //
 // nice to have:
-// -- up arrow on terminal
 // -- module loader
 // -- tests
 
@@ -36,7 +34,7 @@ var PuzzleApp = React.createClass({
     return flatGrid[index];
   },
 
-  _shuffleGrid: function _shuffleGrid(flatGrid) {
+  _shuffleGrid: function _shuffleGrid() {
     var SOLVING_MOVES = 8;
     var BLANK_CELL = _.random(0,8);
     var grid;

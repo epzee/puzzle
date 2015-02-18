@@ -2,14 +2,49 @@ var Terminal = React.createClass({
   getInitialState: function() {
     return {
       value: '',
+      cmdIndex: -1,
       syntaxError: false
     };
   },
+  historyHandler: function (keyCode) {
+
+    var _cmdIndex = this.state.cmdIndex;
+
+    if (keyCode === 38) {
+
+      if (this.state.cmdIndex < (this.props.commands.length - 1)) {
+        _cmdIndex++;
+        console.log('incremented, going back', _cmdIndex);
+      }
+
+    } else {
+
+      if (this.state.cmdIndex > 0) {
+        _cmdIndex--;
+        console.log('decremented, going forward', _cmdIndex);
+      }
+    }
+
+    this.setState({cmdIndex: _cmdIndex}, function () {
+      console.log(this.props.commands[this.state.cmdIndex]);
+      this.setState({value: this.props.commands[this.state.cmdIndex]});
+    });
+
+  },
   keyHandler: function (e) {
+
+    if (e.keyCode === 38 || e.keyCode === 40) {
+      this.historyHandler(e.keyCode);
+      e.preventDefault();
+      return;
+    }
 
     if (e.keyCode === 13) {
       if (this.props.parser.isValidCommand(this.state.value)) {
-        //todo make child component and remove from state, use props
+
+        console.log('history reset');
+        this.setState({cmdIndex: -1});
+
         var validMove = this.props.moveCellHandler(this.props.parser.currentMove);
 
         if(validMove) {
