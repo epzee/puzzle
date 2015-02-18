@@ -16,7 +16,7 @@ var Terminal = React.createClass({
         this.props.errorMsgHandler('');
         this.props.moveCellHandler(this.props.parser.currentMove);
       } else {
-        this.props.errorMsgHandler('Syntax error!');
+        this.props.errorMsgHandler('Syntax error! Remember, only valid PHP syntax like: $one->left();');
       }
     }
   },

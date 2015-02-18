@@ -131,11 +131,22 @@ var PuzzleApp = React.createClass({
   render: function () {
     return (
       <div>
-        <Timer elapsedTime={this.state.elapsedTime} />
-        <JigsawGrid isPlaying={this.state.isPlaying} grid={this.state.grid} errorHandler={this.errorHandler} />
-        <ErrorReporter message={this.state.errorMsg} />
-        <Terminal parser={PuzzlePHPParser} errorMsgHandler={this.errorHandler} moveCellHandler={this.handleMoveCell} />
         <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
+        <div className="container">
+          <div className="row vertical-separation">
+            <div className="col-xs-12">
+              <img src="images/logo-sainsburys.png" width="25%" />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12">
+                <Timer elapsedTime={this.state.elapsedTime} />
+                <JigsawGrid isPlaying={this.state.isPlaying} grid={this.state.grid} errorHandler={this.errorHandler} />
+                <ErrorReporter message={this.state.errorMsg} />
+                <Terminal parser={PuzzlePHPParser} errorMsgHandler={this.errorHandler} moveCellHandler={this.handleMoveCell} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
