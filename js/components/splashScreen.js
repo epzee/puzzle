@@ -8,9 +8,17 @@ var SplashScreen = React.createClass({
               <div className="row vertical-separation">
                 <div className={this.props.isSolved ? 'hidden' : ''}>
                   <div className="col-xs-12 text-center white-box">
-                    <h1>Interesting title here!</h1>
-                    <p>Syntax exmaple here! $one->up();</p>
-                    <button className="btn btn-lg btn-success" onClick={this.props.handleStart}>Play!</button>
+                    <h1>Jigsaw puzzle!</h1>
+                    <p>Syntax:</p>
+                    <code>
+                      <span>$one->up();</span><br/>
+                      <span>$one->down();</span><br/>
+                      <span>$one->left();</span><br/>
+                      <span>$one->right();</span>
+                    </code>
+                    <div className="vertical-separation">
+                      <button className="btn btn-lg btn-success" onClick={this.props.handleStart}>Play!</button>
+                    </div>
                   </div>
                 </div>
                 <div className={this.props.isSolved ? '' : 'hidden'}>
