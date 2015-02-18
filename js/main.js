@@ -22,7 +22,8 @@ var PuzzleApp = React.createClass({
           [0,1,2],
           [3,4,5],
           [6,7,8]
-        ]
+        ],
+      commands: []
     }
   },
 
@@ -205,11 +206,9 @@ var PuzzleApp = React.createClass({
   },
 
   resetHandler: function () {
-    if(this.state.isPlaying) {
-      clearInterval(_interval);
-      _interval = null;
-      this.setState(this.getInitialState());
-    }
+    clearInterval(_interval);
+    _interval = null;
+    this.setState(this.getInitialState());
   },
   errorHandler: function (msg) {
     this.setState({errorMsg: msg});
@@ -230,7 +229,7 @@ var PuzzleApp = React.createClass({
                 <Timer elapsedTime={this.state.elapsedTime} />
                 <JigsawGrid blankCell={this.state.blankCell} isPlaying={this.state.isPlaying} grid={this.state.grid} errorHandler={this.errorHandler} />
                 <ErrorReporter message={this.state.errorMsg} />
-                <Terminal parser={PuzzlePHPParser} errorMsgHandler={this.errorHandler} moveCellHandler={this.handleMoveCell} />
+                <Terminal commands={this.state.commands} parser={PuzzlePHPParser} errorMsgHandler={this.errorHandler} moveCellHandler={this.handleMoveCell} />
             </div>
           </div>
         </div>

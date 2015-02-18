@@ -2,8 +2,7 @@ var Terminal = React.createClass({
   getInitialState: function() {
     return {
       value: '',
-      syntaxError: false,
-      commands: []
+      syntaxError: false
     };
   },
   keyHandler: function (e) {
@@ -14,7 +13,7 @@ var Terminal = React.createClass({
         var validMove = this.props.moveCellHandler(this.props.parser.currentMove);
 
         if(validMove) {
-          this.state.commands.unshift(this.state.value);
+          this.props.commands.unshift(this.state.value);
           this.setState({value: ''});
           this.props.errorMsgHandler('');
         }
@@ -41,7 +40,7 @@ var Terminal = React.createClass({
         </div>
         <div className="col-xs-12">
           <div className="history">
-            {this.state.commands.map(function(command, i){
+            {this.props.commands.map(function(command, i){
               return <span key={i}>{command}</span>;
             })}
           </div>
