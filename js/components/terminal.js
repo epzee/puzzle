@@ -38,8 +38,8 @@ var Terminal = React.createClass({
         </div>
         <div className="col-xs-12">
           <div className="history">
-            {this.state.commands.map(function(object, i){
-              return <span key={i}>{object}</span>;
+            {this.state.commands.map(function(command, i){
+              return <span key={i}>{command}</span>;
             })}
           </div>
         </div>
