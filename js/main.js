@@ -100,12 +100,14 @@ var PuzzleApp = React.createClass({
     // Pre-condition: validate cell and direction syntax before calling this method
 
     if (!currentMove || !currentMove.cell || !currentMove.direction) {
-      throw Error('Please provide a valid move object');
+      // throw Error('Please provide a valid move object');
+      console.error('Please provide a valid move object');
+      return false;
     }
 
     if (currentMove.cell === this.state.blankCell) {
       this.setState({errorMsg: 'Can\'t move the empty cell'});
-      return;
+      return false;
     }
 
     var directionMap = {
@@ -115,7 +117,7 @@ var PuzzleApp = React.createClass({
       right: 'moveRight'
     };
 
-    this[directionMap[currentMove.direction]](currentMove.cell);
+    return this[directionMap[currentMove.direction]](currentMove.cell);
 
   },
 
@@ -133,14 +135,14 @@ var PuzzleApp = React.createClass({
 
     if(targetRow < 0 || targetRow > 2 || targetCol < 0 || targetCol > 2) {
       this.setState({errorMsg: 'Forbidden Move: You can\'t move cell ' + (cellIndex + 1) + ' outside the grid'});
-      return;
+      return false;
     }
 
     var targetCellIndex = flatGrid.indexOf(targetCellPosition);
 
     if(targetCellIndex + 1 !== this.state.blankCell) {
       this.setState({errorMsg: 'Forbidden Move: You can only move a cell into the blank space'});
-      return;
+      return false;
     }
 
     flatGrid[cellIndex] = flatGrid[targetCellIndex];
@@ -156,6 +158,8 @@ var PuzzleApp = React.createClass({
       this._solvedState();
     }
 
+    return true;
+
   },
 
   _solvedState: function _solvedState() {
@@ -168,19 +172,19 @@ var PuzzleApp = React.createClass({
   },
 
   moveUp: function moveUp(cellIndex) {
-    this._move(cellIndex, -1, 0);
+    return this._move(cellIndex, -1, 0);
   },
 
   moveDown: function moveDown(cellIndex) {
-    this._move(cellIndex, 1, 0);
+    return this._move(cellIndex, 1, 0);
   },
 
   moveLeft: function moveLeft(cellIndex) {
-    this._move(cellIndex, 0, -1);
+    return this._move(cellIndex, 0, -1);
   },
 
   moveRight: function moveRight(cellIndex) {
-    this._move(cellIndex, 0, 1);
+    return this._move(cellIndex, 0, 1);
   },
 
   startHandler: function () {

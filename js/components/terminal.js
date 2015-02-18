@@ -11,10 +11,13 @@ var Terminal = React.createClass({
     if (e.keyCode === 13) {
       if (this.props.parser.isValidCommand(this.state.value)) {
         //todo make child component and remove from state, use props
-        this.state.commands.push(this.state.value);
-        this.setState({value: ''});
-        this.props.errorMsgHandler('');
-        this.props.moveCellHandler(this.props.parser.currentMove);
+        var validMove = this.props.moveCellHandler(this.props.parser.currentMove);
+
+        if(validMove) {
+          this.state.commands.unshift(this.state.value);
+          this.setState({value: ''});
+          this.props.errorMsgHandler('');
+        }
       } else {
         this.props.errorMsgHandler('Syntax error! Remember, only valid PHP syntax like: $one->left();');
       }
