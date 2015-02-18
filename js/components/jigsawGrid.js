@@ -4,7 +4,8 @@ var JigsawGrid = React.createClass({
     var grid = _.flatten(this.props.grid);
 
     grid.forEach(function (position, index) {
-      cells[index] = <JigsawGridCell cellIndex={index + 1} cellPosition={position} />;
+      var cellIndex = index + 1;
+      cells[index] = <JigsawGridCell isBlank={false} cellIndex={cellIndex} cellPosition={position} />;
     });
 
     return {
@@ -13,9 +14,12 @@ var JigsawGrid = React.createClass({
   },
 
   reorder: function () {
+    var blankCellIndex = this.props.blankCell;
     for(var row=0; row<3; row++) {
       for(var col=0; col<3; col++) {
-        this.state.cells[row * 3 + col].props.cellPosition = this.props.grid[row][col] + 1;
+        var cell = this.state.cells[row * 3 + col];
+        cell.props.cellPosition = this.props.grid[row][col] + 1;
+        cell.props.isBlank = blankCellIndex === cell.props.cellIndex;
       }
     }
   },

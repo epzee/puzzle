@@ -72,16 +72,18 @@
   z-index: 1;
 }
 
-#jigsawGrid.is-playing .jigsaw-grid-cell.jigsaw-grid-cell-view-9 {
-  background-color: transparent;
+#jigsawGrid .jigsaw-grid-cell.jigsaw-grid-cell-view-9 {
+  background-image: url('/images/logo-php.png');
+  background-position: -200% -200%;
+  z-index: 1;
+}
+
+#jigsawGrid.is-playing .jigsaw-grid-cell.jigsaw-grid-cell-blank {
+  background-color: transparent !important;
   background-image: none;
   z-index: 0;
 }
 
-#jigsawGrid .jigsaw-grid-cell.jigsaw-grid-cell-view-9 {
-  background-image: url('/images/logo-php.png');
-  background-position: -200% -200%;
-}
 
 
 #jigsawGrid .jigsaw-grid-cell.jigsaw-grid-cell-1 {
@@ -133,7 +135,7 @@
   display: none;
 }
 
-#jigsawGrid.is-playing .jigsaw-grid-cell.jigsaw-grid-cell-view-9 .label {
+#jigsawGrid.is-playing .jigsaw-grid-cell.jigsaw-grid-cell-blank .label {
   display: none;
 }
 

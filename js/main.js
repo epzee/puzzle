@@ -18,6 +18,8 @@ var PuzzleApp = React.createClass({
       elapsedTime: '00:00:00',
       errorMsg: '',
       isPlaying: false,
+      isSolved: false,
+      blankCell: -1,
       grid: [
           [0,1,2],
           [3,4,5],
@@ -26,8 +28,74 @@ var PuzzleApp = React.createClass({
     }
   },
 
+  _isSolved: function _isSolved(grid) {
+
+    return _.isEqual(this.getInitialState().grid, grid || this.state.grid);
+
+  },
+
   _getCellPosition: function _getCellPosition(flatGrid, index) {
     return flatGrid[index];
+  },
+
+  _shuffleGrid: function _shuffleGrid(flatGrid) {
+    var SOLVING_MOVES = 8;
+    var BLANK_CELL = _.random(0,8);
+    var grid;
+    var isReady = false;
+
+    while(!isReady) {
+      grid = _.flatten(this.state.grid);
+      var previousPosition = -1;
+
+      for(var move=0; move < SOLVING_MOVES; move++) {
+
+        var validMove = false;
+
+        while(!validMove) {
+          var currentCell = {
+            row: parseInt(grid[BLANK_CELL] / 3),
+            col: grid[BLANK_CELL] % 3
+          };
+
+          var targetCell = {};
+
+          if(!!_.random(1)) {
+            targetCell.row = Math.max(Math.min(2, (currentCell.row + _.shuffle([-1,1])[0])), 0);
+            targetCell.col = currentCell.col;
+          } else {
+            targetCell.col = Math.max(Math.min(2, (currentCell.col + _.shuffle([-1,1])[0])), 0);
+            targetCell.row = currentCell.row;
+          }
+
+          targetIndex = grid.indexOf(targetCell.row * 3 + targetCell.col);
+          var countCellsOutOfPlace = 0;
+
+          validMove = targetIndex !== BLANK_CELL && previousPosition !== grid[targetIndex];
+        }
+
+        previousPosition = grid[BLANK_CELL];
+
+        var saveTargetVal = grid[targetIndex];
+        grid[targetIndex] = grid[BLANK_CELL];
+        grid[BLANK_CELL] = saveTargetVal;
+
+      }
+
+      for(var i=0; i<grid.length; i++) {
+        if(i !== grid[i]) {
+          countCellsOutOfPlace++;
+        }
+      }
+
+      isReady = countCellsOutOfPlace > (grid.length/1.5) && !this._isSolved(_.chunk(grid,3));
+    }
+
+    this.setState({
+      blankCell: BLANK_CELL + 1
+    });
+
+    return _.chunk(grid,3);
   },
 
   handleMoveCell: function (currentMove) {
@@ -38,7 +106,7 @@ var PuzzleApp = React.createClass({
     }
 
     // cell 9 is always empty space (for now)
-    if (currentMove.cell === 9) {
+    if (currentMove.cell === this.state.blankCell) {
       this.setState({errorMsg: 'Can\'t move the empty cell'});
       return;
     }
@@ -51,6 +119,7 @@ var PuzzleApp = React.createClass({
     };
 
     this[directionMap[currentMove.direction]](currentMove.cell);
+
   },
 
   _move: function _move(cellIndex, rowOffset, colOffset) {
@@ -72,7 +141,7 @@ var PuzzleApp = React.createClass({
 
     var targetCellIndex = flatGrid.indexOf(targetCellPosition);
 
-    if(targetCellIndex !== 8) {
+    if(targetCellIndex + 1 !== this.state.blankCell) {
       this.setState({errorMsg: 'Forbidden Move: You can only move a cell into the blank space'});
       return;
     }
@@ -80,10 +149,26 @@ var PuzzleApp = React.createClass({
     flatGrid[cellIndex] = flatGrid[targetCellIndex];
     flatGrid[targetCellIndex] = cellPosition;
 
+    var grid = _.chunk(flatGrid, 3);
+
     this.setState({
-      grid: _.chunk(flatGrid, 3)
+      grid: grid
     });
 
+    if(this._isSolved(grid)) {
+      this._solvedState();
+    }
+
+  },
+
+  _solvedState: function _solvedState() {
+    alert('solved');
+    clearInterval(_interval);
+    this.setState({
+      isSolved: true,
+      isPlaying: false,
+      grid: this.getInitialState().grid
+    });
   },
 
   moveUp: function moveUp(cellIndex) {
@@ -105,10 +190,11 @@ var PuzzleApp = React.createClass({
   startHandler: function () {
 
     var _startTime = moment();
+    var shuffledGrid = this._shuffleGrid();
 
     this.setState({
       isPlaying: true,
-      grid: _.chunk(_.shuffle(_.flatten(this.state.grid)),3)
+      grid: shuffledGrid
     });
 
     _interval = setInterval(function () {
@@ -133,7 +219,7 @@ var PuzzleApp = React.createClass({
     return (
       <div>
         <Timer elapsedTime={this.state.elapsedTime} />
-        <JigsawGrid isPlaying={this.state.isPlaying} grid={this.state.grid} errorHandler={this.errorHandler} />
+        <JigsawGrid blankCell={this.state.blankCell} isPlaying={this.state.isPlaying} grid={this.state.grid} errorHandler={this.errorHandler} />
         <ErrorReporter message={this.state.errorMsg} />
         <Terminal parser={PuzzlePHPParser} errorMsgHandler={this.errorHandler} moveCellHandler={this.handleMoveCell} />
         <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
