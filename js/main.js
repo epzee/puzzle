@@ -1,6 +1,7 @@
 // TODO
 // -- history: clear on reset + make child component and remove from state, use props
-// -- change syntax again
+// -- better start screen (awesome title + better instructions)
+// -- better win screen (GIF)
 //
 // nice to have:
 // -- up arrow on terminal
