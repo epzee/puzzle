@@ -11,7 +11,7 @@ var Terminal = React.createClass({
     if (e.keyCode === 13) {
       if (this.props.parser.isValidCommand(this.state.value)) {
         //todo make child component and remove from state, use props
-        this.state.commands.push(<span>{this.state.value}</span>);
+        this.state.commands.push(this.state.value);
         this.setState({value: ''});
         this.props.errorMsgHandler('');
         this.props.moveCellHandler(this.props.parser.currentMove);
@@ -38,7 +38,9 @@ var Terminal = React.createClass({
         </div>
         <div className="col-xs-12">
           <div className="history">
-            {this.state.commands}
+            {this.state.commands.map(function(object, i){
+              return <span key={i}>{object}</span>;
+            })}
           </div>
         </div>
       </div>
