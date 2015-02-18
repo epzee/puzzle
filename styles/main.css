@@ -5,6 +5,7 @@
 #jigsawGrid {
   border: 10px solid #efefef;
   height: 45vh;
+
 }
 
 #jigsawGrid .jigsaw-grid-container {
@@ -209,4 +210,12 @@
 .white-box {
   padding: 1em;
   background-color: white;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

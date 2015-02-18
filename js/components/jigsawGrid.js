@@ -35,7 +35,7 @@ var JigsawGrid = React.createClass({
     return (
       <div className="row">
         <div className="col-xs-12">
-          <div id="jigsawGrid" className={(this.props.isPlaying ? ' is-playing' : '')}>
+          <div id="jigsawGrid" className={'no-select ' + (this.props.isPlaying ? ' is-playing' : '')}>
             <div className="jigsaw-grid-container">
             {this.state.cells}
             </div>
