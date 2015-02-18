@@ -157,6 +157,7 @@
   width: 100%;
   font-size: 1.3em;
   padding-left: 0.5em;
+  font-family: "Courier New";
 }
 
 .error {
@@ -175,12 +176,17 @@
   display: block;
 }
 
+.history span:before {
+  content: 'php > ';
+}
+
 .history {
   height: 200px;
   overflow: hidden;
   border: 1px solid #CFCBCB;
   border-top: 0;
   padding: 0.5em;
+  font-family: "Courier New";
 }
 
 .overlay {

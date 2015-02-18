@@ -164,11 +164,18 @@ var PuzzleApp = React.createClass({
 
   _solvedState: function _solvedState() {
     clearInterval(_interval);
+
     this.setState({
-      isSolved: true,
-      isPlaying: false,
       grid: this.getInitialState().grid
     });
+
+    setTimeout(function () {
+      this.setState({
+        isPlaying: false,
+        isSolved: true
+      });
+    }.bind(this), 500);
+
   },
 
   moveUp: function moveUp(cellIndex) {
