@@ -159,7 +159,6 @@ var PuzzleApp = React.createClass({
   },
 
   _solvedState: function _solvedState() {
-    alert('solved');
     clearInterval(_interval);
     this.setState({
       isSolved: true,
