@@ -1,4 +1,4 @@
-var StartScreen = React.createClass({
+var SplashScreen = React.createClass({
   render: function () {
     return (
       <div className={!this.props.isPlaying || this.props.isSolved ? '' : 'hidden'}>

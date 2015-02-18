@@ -102,7 +102,6 @@ var PuzzleApp = React.createClass({
       throw Error('Please provide a valid move object');
     }
 
-    // cell 9 is always empty space (for now)
     if (currentMove.cell === this.state.blankCell) {
       this.setState({errorMsg: 'Can\'t move the empty cell'});
       return;
@@ -214,7 +213,7 @@ var PuzzleApp = React.createClass({
   render: function () {
     return (
       <div>
-        <StartScreen isPlaying={this.state.isPlaying} handleStart={this.startHandler} handleReset={this.resetHandler} />
+        <SplashScreen isPlaying={this.state.isPlaying} isSolved={this.state.isSolved} elapsedTime={this.state.elapsedTime} handleStart={this.startHandler} handleReset={this.resetHandler} />
         <div className="container">
           <div className="row vertical-separation">
             <div className="col-xs-12">
