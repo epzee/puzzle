@@ -84,8 +84,6 @@
   z-index: 0;
 }
 
-
-
 #jigsawGrid .jigsaw-grid-cell.jigsaw-grid-cell-1 {
   top: 0;
   left: 0;
@@ -158,6 +156,10 @@
   font-size: 1.3em;
   padding-left: 0.5em;
   font-family: "Courier New";
+}
+
+.terminal input:focus {
+  outline: none;
 }
 
 .error {
