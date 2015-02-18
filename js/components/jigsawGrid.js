@@ -13,6 +13,10 @@ var JigsawGrid = React.createClass({
     };
   },
 
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return !_.isEqual(this.props.grid, nextProps.grid);
+  },
+
   reorder: function () {
     var blankCellIndex = this.props.blankCell;
     for(var row=0; row<3; row++) {
