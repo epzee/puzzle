@@ -1,12 +1,10 @@
 // TODO
-// -- Overlay (start screen and solved state)
 // -- history: clear on reset + make child component and remove from state, use props
-// -- change syntax again!?
+// -- change syntax again
 //
 // nice to have:
 // -- up arrow on terminal
 // -- module loader
-// -- js parser / option / image
 // -- tests
 
 var _interval; //todo refactor _interval
