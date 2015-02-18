@@ -1,11 +1,10 @@
 // TODO
-// -- Solved state
-// -- 8 move limit
-// -- Overlay
+// -- Overlay (start screen and solved state)
 // -- history: clear on reset + make child component and remove from state, use props
-//
+// -- change syntax again!?
 //
 // nice to have:
+// -- up arrow on terminal
 // -- module loader
 // -- js parser / option / image
 // -- tests

@@ -153,6 +153,7 @@
 .terminal input {
   height: 40px;
   width: 100%;
+  font-size: 1.3em;
 }
 
 .error {
