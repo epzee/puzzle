@@ -1,10 +1,3 @@
-// TODO
-// -- better start screen (awesome title + better instructions)
-//
-// nice to have:
-// -- module loader
-// -- tests
-
 var _interval; //todo refactor _interval
 
 var PuzzleApp = React.createClass({
